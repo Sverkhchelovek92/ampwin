@@ -1,0 +1,107 @@
+body {
+  font-family: system-ui, sans-serif;
+  background: #111;
+  color: #eee;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.container {
+  background: #1a1a1a;
+  padding: 2.5rem 3rem;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  width: 90%;
+  max-width: 480px;
+}
+
+h1 {
+  margin: 0 0 1.5rem;
+  font-size: 1.8rem;
+  color: #4fc3f7;
+}
+
+.track-info {
+  margin: 1rem 0 1.5rem;
+  min-height: 1.4rem;
+  font-size: 1.1rem;
+  color: #aaa;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+button {
+  background: #0288d1;
+  color: white;
+  border: none;
+  padding: 0.9rem 2.2rem;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+button:hover {
+  background: #0277bd;
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  background: #444;
+  cursor: not-allowed;
+}
+
+input[type='file'] {
+  display: none;
+}
+
+.file-label {
+  background: #333;
+  color: #4fc3f7;
+  padding: 0.9rem 2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 2px solid #4fc3f7;
+  transition: all 0.2s;
+}
+
+.file-label:hover {
+  background: #4fc3f7;
+  color: white;
+}
+
+.progress-container {
+  width: 100%;
+  height: 6px;
+  background: #333;
+  border-radius: 3px;
+  margin: 0.8rem 0;
+  cursor: pointer;
+}
+
+.progress {
+  height: 100%;
+  width: 0%;
+  background: #4fc3f7;
+  border-radius: 3px;
+  transition: width 0.1s linear;
+}
+
+.time {
+  font-size: 0.9rem;
+  color: #888;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
