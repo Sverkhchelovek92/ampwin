@@ -33,3 +33,12 @@ fileInput.addEventListener('change', (e) => {
   pauseBtn.style.display = 'none'
   playBtn.style.display = 'inline-block'
 })
+
+audio.addEventListener('loadedmetadata', () => {
+  playBtn.disabled = false
+
+  const duration = audio.duration
+  durationEl.textContent = formatTime(duration)
+})
+
+function formatTime(seconds) {}
