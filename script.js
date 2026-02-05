@@ -53,10 +53,13 @@ function formatTime(seconds) {
 playBtn.addEventListener('click', () => {
   audio.play().catch((err) => {
     console.error('Playback error:', err)
+    return
   })
 
   playBtn.style.display = 'none'
   pauseBtn.style.display = 'inline-block'
+  pauseBtn.disabled = false
+  playBtn.disabled = true
 })
 
 pauseBtn.addEventListener('click', () => {
@@ -64,6 +67,9 @@ pauseBtn.addEventListener('click', () => {
 
   pauseBtn.style.display = 'none'
   playBtn.style.display = 'inline-block'
+
+  playBtn.disabled = false
+  pauseBtn.disabled = true
 })
 
 audio.addEventListener('pause', () => {
