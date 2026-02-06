@@ -105,3 +105,22 @@ input[type='file'] {
   display: flex;
   justify-content: space-between;
 }
+
+.volume-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.volume-container label {
+  font-size: 0.95rem;
+  color: #aaa;
+}
+
+#volume {
+  width: 140px;
+  accent-color: #4fc3f7;
+}
