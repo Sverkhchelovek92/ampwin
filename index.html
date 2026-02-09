@@ -51,9 +51,20 @@
         <div class="progress" id="progress"></div>
       </div>
 
-      <div class="time">
+      <!-- <div class="time">
         <span id="currentTime">0:00</span>
         <span id="duration">0:00</span>
+      </div> -->
+      <div class="transport-section">
+        <button class="transport-btn" id="playBtn" disabled>Prev</button>
+        <button class="transport-btn" id="playBtn" disabled>Play</button>
+        <button class="transport-btn" id="pauseBtn" disabled>Pause</button>
+        <button class="transport-btn" id="pauseBtn" disabled>Stop</button>
+        <button class="transport-btn" id="pauseBtn" disabled>Next</button>
+        <button type="button" class="transport-btn open-btn">
+          <label for="fileInput" class="file-label-inside">Open</label>
+          <input type="file" id="fileInput" accept="audio/*" hidden />
+        </button>
       </div>
 
       <div class="controls">
