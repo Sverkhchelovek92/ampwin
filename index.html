@@ -32,9 +32,20 @@
             <div class="quality-kbps" id="kbpsDisplay">-- kbps</div>
             <div class="quality-khz" id="khzDisplay">-- kHz</div>
           </div>
+          <div class="volume-container">
+            <label for="volume">Volume:</label>
+            <input
+              type="range"
+              id="volume"
+              min="0"
+              max="1"
+              step="0.01"
+              value="1"
+            />
+          </div>
         </div>
       </div>
-      <div class="track-info" id="trackInfo">No tracks selected</div>
+      <!-- <div class="track-info" id="trackInfo">No tracks selected</div> -->
 
       <div class="progress-container" id="progressContainer">
         <div class="progress" id="progress"></div>
@@ -51,18 +62,6 @@
 
         <button id="playBtn" disabled>Play</button>
         <button id="pauseBtn" disabled style="display: none">Pause</button>
-
-        <div class="volume-container">
-          <label for="volume">Volume:</label>
-          <input
-            type="range"
-            id="volume"
-            min="0"
-            max="1"
-            step="0.01"
-            value="1"
-          />
-        </div>
       </div>
     </div>
     <script src="script.js"></script>

@@ -1,5 +1,6 @@
 const fileInput = document.getElementById('fileInput')
-const trackInfo = document.querySelector('.track-info')
+// const trackInfo = document.querySelector('.track-info')
+const trackName = document.querySelector('.track-name')
 
 const playBtn = document.getElementById('playBtn')
 const pauseBtn = document.getElementById('pauseBtn')
@@ -23,7 +24,7 @@ fileInput.addEventListener('change', (e) => {
   const file = e.target.files[0]
   if (!file) return
 
-  trackInfo.textContent = file.name
+  trackName.textContent = file.name
 
   const objectURL = URL.createObjectURL(file)
 
