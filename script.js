@@ -4,6 +4,9 @@ const trackName = document.querySelector('.track-name')
 
 const playBtn = document.getElementById('playBtn')
 const pauseBtn = document.getElementById('pauseBtn')
+const stopBtn = document.getElementById('stopBtn')
+const prevBtn = document.getElementById('prevBtn')
+const nextBtn = document.getElementById('nextBtn')
 
 const progress = document.querySelector('.progress')
 const progressContainer = document.querySelector('.progress-container')
@@ -75,6 +78,7 @@ playBtn.addEventListener('click', () => {
   playBtn.style.display = 'none'
   pauseBtn.style.display = 'inline-block'
   pauseBtn.disabled = false
+  stopBtn.disabled = false
   playBtn.disabled = true
 })
 
@@ -86,6 +90,22 @@ pauseBtn.addEventListener('click', () => {
 
   playBtn.disabled = false
   pauseBtn.disabled = true
+})
+
+stopBtn.addEventListener('click', () => {
+  audio.pause()
+  stopBtn.disabled = true
+  pauseBtn.style.display = 'none'
+  playBtn.style.display = 'inline-block'
+
+  playBtn.disabled = false
+
+  audio.currentTime = 0
+
+  progress.style.width = '0%'
+  currentTimeEl.textContent = '0:00'
+
+  updateProgress()
 })
 
 audio.addEventListener('pause', () => {
