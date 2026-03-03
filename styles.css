@@ -71,12 +71,6 @@ body {
   box-shadow: 1px 1px 1px #00000040;
 }
 
-/* .close-btn:hover {
-  background: #ff0000;
-  color: #b59231;
-  border-color: #ff4040;
-} */
-
 .close-btn:active {
   border: 1px inset #808080;
   background: #a00000;
@@ -97,16 +91,6 @@ body {
   align-items: center;
 }
 
-/* button {
-  background: #0288d1;
-  color: white;
-  border: none;
-  padding: 0.9rem 2.2rem;
-  font-size: 1.1rem;
-  border-radius: 50px;
-  cursor: pointer;
-  transition: all 0.2s;
-} */
 
 button:hover {
   background: #0277bd;

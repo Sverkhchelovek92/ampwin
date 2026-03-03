@@ -32,7 +32,7 @@ fileInput.addEventListener('change', (e) => {
 
   progress.style.width = '0%'
   currentTimeEl.textContent = '0:00'
-  durationEl.textContent = '0:00'
+  // durationEl.textContent = '0:00'
 
   playBtn.disabled = true
   pauseBtn.style.display = 'none'
@@ -43,7 +43,7 @@ audio.addEventListener('loadedmetadata', () => {
   playBtn.disabled = false
 
   const duration = audio.duration
-  durationEl.textContent = formatTime(duration)
+  // durationEl.textContent = formatTime(duration)
 })
 
 function formatTime(seconds) {
