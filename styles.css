@@ -91,7 +91,6 @@ body {
   align-items: center;
 }
 
-
 button:hover {
   background: #0277bd;
   transform: translateY(-1px);
@@ -164,4 +163,8 @@ input[type='file'] {
   width: 140px;
   accent-color: #4fc3f7;
   cursor: pointer;
+}
+
+.info-block {
+  display: flex;
 }
