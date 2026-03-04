@@ -178,3 +178,24 @@ input[type='file'] {
   display: flex;
   margin-top: 2px;
 }
+
+.transport-section {
+  display: flex;
+}
+
+.loop-btn {
+  display: flex;
+}
+
+.loop-indicator {
+  width: 3px;
+  height: 2px;
+  background: #222;
+  border: 1px solid #444;
+  box-shadow:
+    inset 1px 1px 2px #00000080,
+    0 0 3px #00000060;
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}

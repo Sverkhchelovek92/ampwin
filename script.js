@@ -7,6 +7,7 @@ const pauseBtn = document.getElementById('pauseBtn')
 const stopBtn = document.getElementById('stopBtn')
 const prevBtn = document.getElementById('prevBtn')
 const nextBtn = document.getElementById('nextBtn')
+const loopBtn = document.getElementById('loopBtn')
 
 const progress = document.querySelector('.progress')
 const progressContainer = document.querySelector('.progress-container')
