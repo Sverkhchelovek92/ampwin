@@ -17,6 +17,8 @@ const durationEl = document.getElementById('duration')
 
 const volumeSlider = document.getElementById('volume')
 
+let isLoopEnabled = false
+
 // Audio element
 
 const audio = new Audio()
@@ -68,6 +70,13 @@ function updateProgress() {
   currentTimeEl.textContent = formatTime(audio.currentTime)
 }
 
+function showEndedState() {
+  pauseBtn.style.display = 'none'
+  playBtn.style.display = 'inline-block'
+  progress.style.width = '0%'
+  currentTimeEl.textContent = '0:00'
+}
+
 // Play and Pause btns
 
 playBtn.addEventListener('click', () => {
@@ -115,10 +124,12 @@ audio.addEventListener('pause', () => {
 })
 
 audio.addEventListener('ended', () => {
-  pauseBtn.style.display = 'none'
-  playBtn.style.display = 'inline-block'
-  progress.style.width = '0%'
-  currentTimeEl.textContent = '0:00'
+  if (isLoopEnabled) {
+    audio.currentTime = 0
+    audio.play()
+  } else {
+    showEndedState()
+  }
 })
 
 // Volume slider
@@ -155,4 +166,16 @@ progressContainer.addEventListener('click', (e) => {
   audio.currentTime = newTime
 
   updateProgress()
+})
+
+// Loop button
+
+loopBtn.addEventListener('click', () => {
+  isLoopEnabled = !isLoopEnabled
+
+  if (isLoopEnabled) {
+    loopBtn.classList.add('active')
+  } else {
+    loopBtn.classList.remove('active')
+  }
 })
