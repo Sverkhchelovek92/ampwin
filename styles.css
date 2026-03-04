@@ -139,10 +139,19 @@ input[type='file'] {
 
 .time {
   font-size: 0.9rem;
-  color: #888;
+  color: #888888;
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+.time-display {
+  background-color: black;
+  margin-left: 6px;
+}
+
+#currentTime {
+  color: #09c15c;
 }
 
 .volume-container {
@@ -167,4 +176,5 @@ input[type='file'] {
 
 .info-block {
   display: flex;
+  margin-top: 2px;
 }
