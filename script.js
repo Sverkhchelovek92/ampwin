@@ -16,6 +16,7 @@ const currentTimeEl = document.getElementById('currentTime')
 const durationEl = document.getElementById('duration')
 
 const volumeSlider = document.getElementById('volume')
+const balanceSlider = document.getElementById('balance')
 
 let isLoopEnabled = false
 
@@ -25,6 +26,16 @@ const audio = new Audio()
 audio.preload = 'metadata'
 
 audio.volume = 1
+
+// Audio context
+
+let audioCtx = null
+let sourceNode = null
+let splitter = null
+let merger = null
+let leftGain = null
+let rightGain = null
+let balanceValue = 0
 
 fileInput.addEventListener('change', (e) => {
   const file = e.target.files[0]
@@ -86,6 +97,7 @@ function showEndedState() {
 // Play and Pause btns
 
 playBtn.addEventListener('click', () => {
+  initAudioGraph()
   audio.play().catch((err) => {
     console.error('Playback error:', err)
     return
@@ -178,4 +190,54 @@ loopBtn.addEventListener('click', () => {
   } else {
     loopBtn.classList.remove('active')
   }
+})
+
+// Balance logic
+
+function initAudioGraph() {
+  if (audioCtx) return
+
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+
+  sourceNode = audioCtx.createMediaElementSource(audio)
+
+  splitter = audioCtx.createChannelSplitter(2)
+
+  leftGain = audioCtx.createGain()
+  rightGain = audioCtx.createGain()
+
+  merger = audioCtx.createChannelMerger(2)
+
+  sourceNode.connect(splitter)
+
+  splitter.connect(leftGain, 0)
+  splitter.connect(rightGain, 1)
+
+  leftGain.connect(merger, 0, 0)
+  rightGain.connect(merger, 0, 1)
+
+  merger.connect(audioCtx.destination)
+
+  updateBalance()
+}
+
+function updateBalance() {
+  if (!leftGain || !rightGain) return
+
+  let leftVol = 1
+  let rightVol = 1
+
+  if (balanceValue < 0) {
+    rightVol = 1 + balanceValue
+  } else if (balanceValue > 0) {
+    leftVol = 1 - balanceValue
+  }
+
+  leftGain.gain.value = leftVol
+  rightGain.gain.value = rightVol
+}
+
+balanceSlider.addEventListener('input', () => {
+  balanceValue = parseFloat(balanceSlider.value)
+  updateBalance()
 })

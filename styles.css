@@ -225,3 +225,7 @@ input[type='file'] {
   display: flex;
   margin-top: 0.5rem;
 }
+
+#balance {
+  cursor: pointer;
+}
