@@ -70,9 +70,15 @@ function updateProgress() {
   currentTimeEl.textContent = formatTime(audio.currentTime)
 }
 
+// End (Stop) State
+
 function showEndedState() {
   pauseBtn.style.display = 'none'
   playBtn.style.display = 'inline-block'
+
+  stopBtn.disabled = true
+  playBtn.disabled = false
+
   progress.style.width = '0%'
   currentTimeEl.textContent = '0:00'
 }
@@ -104,16 +110,10 @@ pauseBtn.addEventListener('click', () => {
 
 stopBtn.addEventListener('click', () => {
   audio.pause()
-  stopBtn.disabled = true
-  pauseBtn.style.display = 'none'
-  playBtn.style.display = 'inline-block'
-
-  playBtn.disabled = false
 
   audio.currentTime = 0
 
-  progress.style.width = '0%'
-  currentTimeEl.textContent = '0:00'
+  showEndedState()
 
   updateProgress()
 })
