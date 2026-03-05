@@ -160,7 +160,6 @@ input[type='file'] {
   gap: 1rem;
   width: 100%;
   justify-content: center;
-  margin-top: 1rem;
 }
 
 .volume-container label {
@@ -216,4 +215,13 @@ input[type='file'] {
     inset 0.5px 0.5px 0.5px #02a92c,
     0 0 8px #00ff41,
     0 0 12px #00ff4180;
+}
+
+.quality-display {
+  display: flex;
+}
+
+.volume-balance {
+  display: flex;
+  margin-top: 0.5rem;
 }

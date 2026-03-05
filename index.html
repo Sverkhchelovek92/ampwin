@@ -32,16 +32,28 @@
             <div class="quality-kbps" id="kbpsDisplay">-- kbps</div>
             <div class="quality-khz" id="khzDisplay">-- kHz</div>
           </div>
-          <div class="volume-container">
-            <label for="volume">Volume:</label>
-            <input
-              type="range"
-              id="volume"
-              min="0"
-              max="1"
-              step="0.01"
-              value="1"
-            />
+          <div class="volume-balance">
+            <div class="volume-container">
+              <label for="volume"></label>
+              <input
+                type="range"
+                id="volume"
+                min="0"
+                max="1"
+                step="0.01"
+                value="1"
+              />
+            </div>
+            <div class="balance-container">
+              <input
+                type="range"
+                id="balance"
+                min="-1"
+                max="1"
+                step="0.01"
+                value="0"
+              />
+            </div>
           </div>
         </div>
       </div>

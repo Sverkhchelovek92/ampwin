@@ -143,7 +143,7 @@ volumeSlider.addEventListener('input', () => {
 audio.addEventListener('timeupdate', updateProgress)
 
 audio.addEventListener('play', () => {
-  updateProgress() // сразу обновить
+  updateProgress()
 })
 
 // Progress click
