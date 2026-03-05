@@ -168,8 +168,10 @@ input[type='file'] {
 }
 
 #volume {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
   width: 140px;
-  accent-color: #4fc3f7;
   cursor: pointer;
 }
 
@@ -227,5 +229,43 @@ input[type='file'] {
 }
 
 #balance {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
   cursor: pointer;
+  width: 70px;
+}
+
+#volume::-webkit-slider-runnable-track {
+  /* width: 6px; */
+  height: 75%;
+  background: rgb(221, 93, 19);
+  border-radius: 3px;
+  box-shadow: inset 2px 2px 4px black;
+}
+
+#balance::-webkit-slider-runnable-track {
+  height: 75%;
+  background: rgb(44, 130, 20);
+  border-radius: 3px;
+  box-shadow: inset 2px 2px 4px black;
+}
+
+#volume::-webkit-slider-thumb,
+#balance::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+
+  width: 18px;
+  height: 16px;
+  background: grey;
+  border: 1px solid black;
+  border-radius: 1px;
+  cursor: pointer;
+
+  margin-top: -2.5px;
+
+  box-shadow:
+    inset 2px 2px 1px rgba(255, 255, 255, 0.8),
+    inset -2px -2px 1px rgba(0, 0, 0, 0.35);
 }
