@@ -192,11 +192,13 @@ input[type='file'] {
   cursor: pointer;
 }
 
-.loop-btn {
+.loop-btn,
+.shuffle-btn {
   display: flex;
 }
 
-.loop-indicator {
+.loop-indicator,
+.shuffle-indicator {
   width: 3px;
   height: 2px;
   margin-left: -4px;
@@ -211,7 +213,8 @@ input[type='file'] {
     box-shadow 0.15s ease;
 }
 
-.loop-btn.active .loop-indicator {
+.loop-btn.active .loop-indicator,
+.shuffle-btn.active .shuffle-indicator {
   background: #00ff41;
   box-shadow:
     inset 0.5px 0.5px 0.5px #02a92c,
