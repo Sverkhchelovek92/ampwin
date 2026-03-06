@@ -1,6 +1,6 @@
 const fileInput = document.getElementById('fileInput')
 // const trackInfo = document.querySelector('.track-info')
-const trackName = document.querySelector('.track-name')
+const trackName = document.querySelector('.marquee-content')
 
 const playBtn = document.getElementById('playBtn')
 const pauseBtn = document.getElementById('pauseBtn')

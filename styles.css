@@ -84,6 +84,49 @@ body {
   color: #aaa;
 }
 
+.track-name {
+  background: #000;
+  border: 1px inset #333; /* bevel как в Winamp */
+  height: 18px; /* типичная высота в Winamp */
+  overflow: hidden;
+  position: relative;
+  font-family: 'VT323', monospace; /* или другой пиксельный шрифт */
+  font-size: 13px;
+  line-height: 18px;
+  color: #00ff41; /* ярко-зелёный LCD */
+  text-shadow: 0 0 4px #00ff4180; /* лёгкое свечение */
+  white-space: nowrap;
+}
+
+/* Обёртка для анимации */
+.marquee-wrapper {
+  display: inline-flex;
+  position: absolute;
+  white-space: nowrap;
+  will-change: transform;
+  animation: scroll-left 18s linear infinite; /* скорость регулируй здесь */
+}
+
+/* Дублируем текст, чтобы был seamless loop */
+.marquee-content {
+  padding-right: 40px; /* расстояние между повторениями */
+}
+
+/* Анимация справа налево */
+@keyframes scroll-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Пауза при наведении (очень полезно для доступности) */
+.track-name:hover .marquee-wrapper {
+  animation-play-state: paused;
+}
+
 .controls {
   display: flex;
   flex-direction: column;
