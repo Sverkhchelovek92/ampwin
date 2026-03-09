@@ -1,6 +1,8 @@
 const fileInput = document.getElementById('fileInput')
-// const trackInfo = document.querySelector('.track-info')
+
 const trackName = document.getElementById('trackName')
+const trackWrapper = document.getElementById('marqueeWrapper')
+const trackItem = document.getElementById('marqueeItem')
 
 const playBtn = document.getElementById('playBtn')
 const pauseBtn = document.getElementById('pauseBtn')
@@ -37,18 +39,48 @@ let leftGain = null
 let rightGain = null
 let balanceValue = 0
 
+function buildMarquee(text) {
+  trackWrapper.innerHTML = ''
+
+  const base = document.createElement('span')
+  base.className = 'marquee-item'
+  base.textContent = text
+
+  trackWrapper.appendChild(base)
+
+  const containerWidth = trackName.offsetWidth
+  const textWidth = base.offsetWidth
+
+  const count = Math.ceil(containerWidth / textWidth) + 2
+
+  for (let i = 0; i < count; i++) {
+    const clone = base.cloneNode(true)
+    trackWrapper.appendChild(clone)
+  }
+
+  const distance = textWidth
+
+  const duration = distance / 20
+
+  trackWrapper.style.animation = `marquee ${duration}s linear infinite`
+
+  const style = document.createElement('style')
+  style.innerHTML = `
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-${distance}px); }
+    }
+  `
+  document.head.appendChild(style)
+}
+
 fileInput.addEventListener('change', (e) => {
   const file = e.target.files[0]
   if (!file) return
 
   const newTitle = file.name
 
-  // trackName.textContent = file.name
-
-  const contents = trackName.querySelectorAll('.marquee-content')
-  contents.forEach((el) => {
-    el.textContent = newTitle
-  })
+  buildMarquee(newTitle)
 
   const objectURL = URL.createObjectURL(file)
 
@@ -56,7 +88,6 @@ fileInput.addEventListener('change', (e) => {
 
   progress.style.width = '0%'
   currentTimeEl.textContent = '0:00'
-  // durationEl.textContent = '0:00'
 
   playBtn.disabled = true
   pauseBtn.style.display = 'none'
@@ -67,7 +98,6 @@ audio.addEventListener('loadedmetadata', () => {
   playBtn.disabled = false
 
   const duration = audio.duration
-  // durationEl.textContent = formatTime(duration)
 })
 
 function formatTime(seconds) {
