@@ -1,6 +1,6 @@
 const fileInput = document.getElementById('fileInput')
 // const trackInfo = document.querySelector('.track-info')
-const trackName = document.querySelector('.marquee-content')
+const trackName = document.getElementById('trackName')
 
 const playBtn = document.getElementById('playBtn')
 const pauseBtn = document.getElementById('pauseBtn')
@@ -41,7 +41,14 @@ fileInput.addEventListener('change', (e) => {
   const file = e.target.files[0]
   if (!file) return
 
-  trackName.textContent = file.name
+  const newTitle = file.name
+
+  // trackName.textContent = file.name
+
+  const contents = trackName.querySelectorAll('.marquee-content')
+  contents.forEach((el) => {
+    el.textContent = newTitle
+  })
 
   const objectURL = URL.createObjectURL(file)
 
