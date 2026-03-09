@@ -311,3 +311,23 @@ input[type='file'] {
     inset 2px 2px 1px rgba(255, 255, 255, 0.8),
     inset -2px -2px 1px rgba(0, 0, 0, 0.35);
 }
+
+.quality-kbps,
+.quality-khz {
+  display: flex;
+}
+
+.kbps-display,
+.khz-display {
+  background: #000;
+  border: 1px inset #333;
+  height: 18px;
+  overflow: hidden;
+  position: relative;
+  font-family: 'VT323', monospace;
+  font-size: 13px;
+  line-height: 18px;
+  color: #00ff41;
+  text-shadow: 0 0 4px #00ff4180;
+  white-space: nowrap;
+}
