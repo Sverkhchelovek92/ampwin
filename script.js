@@ -22,6 +22,8 @@ const balanceSlider = document.getElementById('balance')
 
 let isLoopEnabled = false
 
+let currentFile = null
+
 // Audio element
 
 const audio = new Audio()
@@ -78,6 +80,8 @@ fileInput.addEventListener('change', (e) => {
   const file = e.target.files[0]
   if (!file) return
 
+  currentFile = file
+
   const newTitle = file.name
 
   buildMarquee(newTitle)
@@ -85,6 +89,9 @@ fileInput.addEventListener('change', (e) => {
   const objectURL = URL.createObjectURL(file)
 
   audio.src = objectURL
+
+  document.getElementById('kbpsDisplay').textContent = '--'
+  document.getElementById('khzDisplay').textContent = '--'
 
   progress.style.width = '0%'
   currentTimeEl.textContent = '0:00'
@@ -98,6 +105,23 @@ audio.addEventListener('loadedmetadata', () => {
   playBtn.disabled = false
 
   const duration = audio.duration
+  if (!duration || isNaN(duration) || duration <= 0) return
+
+  // kHz
+
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)()
+  const sampleRate = audioCtx.sampleRate
+
+  document.getElementById('khzDisplay').textContent = (
+    sampleRate / 1000
+  ).toFixed(1)
+
+  // kbps
+
+  if (currentFile && currentFile.size) {
+    const bitrate = Math.round((currentFile.size * 8) / duration / 1000)
+    document.getElementById('kbpsDisplay').textContent = bitrate
+  }
 })
 
 function formatTime(seconds) {

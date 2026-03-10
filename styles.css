@@ -307,6 +307,10 @@ input[type='file'] {
   display: flex;
 }
 
+.quality-kbps {
+  margin-right: 5px;
+}
+
 .kbps-display,
 .khz-display {
   background: #000;
@@ -320,4 +324,9 @@ input[type='file'] {
   color: #00ff41;
   text-shadow: 0 0 4px #00ff4180;
   white-space: nowrap;
+  margin-right: 3px;
+}
+
+.right-section {
+  margin-left: 10px;
 }
