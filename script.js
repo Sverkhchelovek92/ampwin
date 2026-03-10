@@ -11,7 +11,7 @@ const prevBtn = document.getElementById('prevBtn')
 const nextBtn = document.getElementById('nextBtn')
 const loopBtn = document.getElementById('loopBtn')
 
-const progress = document.querySelector('.progress')
+const progress = document.querySelector('.seek-knob')
 const progressContainer = document.querySelector('.progress-container')
 
 const currentTimeEl = document.getElementById('currentTime')
@@ -93,7 +93,7 @@ fileInput.addEventListener('change', (e) => {
   document.getElementById('kbpsDisplay').textContent = '--'
   document.getElementById('khzDisplay').textContent = '--'
 
-  progress.style.width = '0%'
+  // progress.style.width = '0%'
   currentTimeEl.textContent = '0:00'
 
   playBtn.disabled = true
@@ -136,8 +136,14 @@ function formatTime(seconds) {
 function updateProgress() {
   if (!audio.duration || isNaN(audio.duration)) return
 
-  const progressPercent = (audio.currentTime / audio.duration) * 100
-  progress.style.width = `${progressPercent}%`
+  const percent = audio.currentTime / audio.duration
+
+  const trackWidth = progressContainer.clientWidth
+  const knobWidth = progress.offsetWidth
+
+  const position = percent * (trackWidth - knobWidth)
+
+  progress.style.left = `${position}px`
 
   currentTimeEl.textContent = formatTime(audio.currentTime)
 }
@@ -151,7 +157,7 @@ function showEndedState() {
   stopBtn.disabled = true
   playBtn.disabled = false
 
-  progress.style.width = '0%'
+  progress.style.left = '0px'
   currentTimeEl.textContent = '0:00'
 }
 
@@ -227,16 +233,11 @@ progressContainer.addEventListener('click', (e) => {
   }
 
   const rect = progressContainer.getBoundingClientRect()
-  if (rect.width <= 0) return
-
   const clickX = e.clientX - rect.left
-  let percent = clickX / rect.width
 
-  percent = Math.max(0, Math.min(1, percent))
+  const percent = clickX / rect.width
 
-  const newTime = percent * audio.duration
-
-  audio.currentTime = newTime
+  audio.currentTime = percent * audio.duration
 
   updateProgress()
 })
