@@ -164,28 +164,46 @@ input[type='file'] {
 
   border-top: 1px solid #404040;
   border-left: 1px solid #404040;
-  border-bottom: 1px solid #ffffff;
-  border-right: 1px solid #ffffff;
+  border-bottom: 1px solid #888888;
+  border-right: 1px solid #888888;
 }
 
 .seek-knob {
   position: absolute;
-  top: -2px;
+  top: -1.5px;
   left: 0;
 
-  width: 12px;
+  width: 25px;
   height: 10px;
 
-  background: linear-gradient(to bottom, #ffe27a, #d4a017);
+  background: #f9e188;
 
-  border-top: 1px solid #fff4b0;
-  border-left: 1px solid #fff4b0;
-  border-right: 1px solid #7a5a00;
-  border-bottom: 1px solid #7a5a00;
+  border-top: 1px solid #f9e188;
+  border-left: 1px solid #f9e188;
+  border-right: 1px solid #443200;
+  border-bottom: 1px solid #443200;
 
-  box-shadow: inset 1px 1px 0 #fff;
+  box-shadow:
+    inset 1px 1px 0 #a07800,
+    inset -1px -1px 0 #fff,
+    1px 1px 0 rgba(0, 0, 0, 0.35);
 
   transition: left 0.05s linear;
+}
+
+.seek-knob::before {
+  content: '';
+  position: absolute;
+
+  left: 2px;
+  right: 2px;
+  top: 50%;
+
+  height: 1px;
+
+  background: #573802;
+
+  transform: translateY(-50%);
 }
 
 .time {
