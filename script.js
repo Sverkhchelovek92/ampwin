@@ -364,3 +364,29 @@ balanceSlider.addEventListener('input', () => {
   balanceValue = parseFloat(balanceSlider.value)
   updateBalance()
 })
+
+// Next and Prev btns
+
+nextBtn.addEventListener('click', () => {
+  if (playlist.length === 0) return
+
+  let nextIndex = currentTrackIndex + 1
+
+  if (nextIndex >= playlist.length) {
+    nextIndex = 0
+  }
+
+  playTrack(nextIndex)
+})
+
+prevBtn.addEventListener('click', () => {
+  if (playlist.length === 0) return
+
+  let prevIndex = currentTrackIndex - 1
+
+  if (prevIndex < 0) {
+    prevIndex = playlist.length - 1
+  }
+
+  playTrack(prevIndex)
+})
