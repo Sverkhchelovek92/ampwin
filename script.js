@@ -122,6 +122,11 @@ fileInput.addEventListener('change', (e) => {
 
   renderPlaylist()
 
+  playBtn.disabled = false
+  nextBtn.disabled = false
+  prevBtn.disabled = false
+  pauseBtn.disabled = false
+
   if (currentTrackIndex === -1) {
     playTrack(0)
   }
@@ -149,7 +154,18 @@ function playTrack(index) {
   currentTrackIndex = index
   const track = playlist[index]
 
+  currentFile = track.file
+
   audio.src = track.url
+
+  buildMarquee(track.name)
+
+  document.getElementById('kbpsDisplay').textContent = '--'
+  document.getElementById('khzDisplay').textContent = '--'
+
+  currentTimeEl.textContent = '0:00'
+  progress.style.left = '0px'
+
   audio.play().catch((err) => console.error(err))
 
   renderPlaylist()
