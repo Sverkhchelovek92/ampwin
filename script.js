@@ -260,12 +260,13 @@ audio.addEventListener('ended', () => {
   if (isLoopEnabled) {
     audio.currentTime = 0
     audio.play()
-  } else {
-    let nextIndex = currentTrackIndex + 1
+    return
+  }
 
-    if (nextIndex >= playlist.length) {
-      nextIndex = 0
-    }
+  let nextIndex = currentTrackIndex + 1
+
+  if (nextIndex >= playlist.length) {
+    nextIndex = 0
   }
 
   playTrack(nextIndex)
