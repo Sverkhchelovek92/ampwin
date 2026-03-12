@@ -126,15 +126,31 @@ fileInput.addEventListener('change', (e) => {
   nextBtn.disabled = false
   prevBtn.disabled = false
   pauseBtn.disabled = false
+  stopBtn.disabled = false
 
   if (currentTrackIndex === -1) {
     playTrack(0)
   }
 })
 
+const panel = document.querySelector('.playlist-panel')
+
+if (playlist.length === 0) {
+  panel.style.display = 'none'
+} else {
+  panel.style.display = 'block'
+}
+
 function renderPlaylist() {
   const ul = document.getElementById('playlist')
   ul.innerHTML = ''
+
+  if (playlist.length === 0) {
+    panel.style.display = 'none'
+    return
+  }
+
+  panel.style.display = 'block'
 
   playlist.forEach((track, index) => {
     const li = document.createElement('li')
