@@ -24,6 +24,11 @@ let isLoopEnabled = false
 
 let currentFile = null
 
+// Playlist
+
+let playlist = []
+let currentTrackIndex = -1
+
 // Audio element
 
 const audio = new Audio()
@@ -76,30 +81,79 @@ function buildMarquee(text) {
   document.head.appendChild(style)
 }
 
+// fileInput.addEventListener('change', (e) => {
+//   const file = e.target.files[0]
+//   if (!file) return
+
+//   currentFile = file
+
+//   const newTitle = file.name
+
+//   buildMarquee(newTitle)
+
+//   const objectURL = URL.createObjectURL(file)
+
+//   audio.src = objectURL
+
+//   document.getElementById('kbpsDisplay').textContent = '--'
+//   document.getElementById('khzDisplay').textContent = '--'
+
+//   // progress.style.width = '0%'
+//   currentTimeEl.textContent = '0:00'
+
+//   playBtn.disabled = true
+//   pauseBtn.style.display = 'none'
+//   playBtn.style.display = 'inline-block'
+// })
+
 fileInput.addEventListener('change', (e) => {
-  const file = e.target.files[0]
-  if (!file) return
+  const files = Array.from(e.target.files)
+  if (files.length === 0) return
 
-  currentFile = file
+  files.forEach((file) => {
+    const url = URL.createObjectURL(file)
+    playlist.push({
+      id: Date.now() + Math.random(),
+      name: file.name,
+      file: file,
+      url: url,
+    })
+  })
 
-  const newTitle = file.name
+  renderPlaylist()
 
-  buildMarquee(newTitle)
-
-  const objectURL = URL.createObjectURL(file)
-
-  audio.src = objectURL
-
-  document.getElementById('kbpsDisplay').textContent = '--'
-  document.getElementById('khzDisplay').textContent = '--'
-
-  // progress.style.width = '0%'
-  currentTimeEl.textContent = '0:00'
-
-  playBtn.disabled = true
-  pauseBtn.style.display = 'none'
-  playBtn.style.display = 'inline-block'
+  if (currentTrackIndex === -1) {
+    playTrack(0)
+  }
 })
+
+function renderPlaylist() {
+  const ul = document.getElementById('playlist')
+  ul.innerHTML = ''
+
+  playlist.forEach((track, index) => {
+    const li = document.createElement('li')
+    li.textContent = `${index + 1}. ${track.name}`
+    li.dataset.index = index
+
+    if (index === currentTrackIndex) li.classList.add('playing')
+
+    li.addEventListener('click', () => playTrack(index))
+    ul.appendChild(li)
+  })
+}
+
+function playTrack(index) {
+  if (index < 0 || index >= playlist.length) return
+
+  currentTrackIndex = index
+  const track = playlist[index]
+
+  audio.src = track.url
+  audio.play().catch((err) => console.error(err))
+
+  renderPlaylist()
+}
 
 audio.addEventListener('loadedmetadata', () => {
   playBtn.disabled = false
@@ -207,8 +261,14 @@ audio.addEventListener('ended', () => {
     audio.currentTime = 0
     audio.play()
   } else {
-    showEndedState()
+    let nextIndex = currentTrackIndex + 1
+
+    if (nextIndex >= playlist.length) {
+      nextIndex = 0
+    }
   }
+
+  playTrack(nextIndex)
 })
 
 // Volume slider
