@@ -81,31 +81,6 @@ function buildMarquee(text) {
   document.head.appendChild(style)
 }
 
-// fileInput.addEventListener('change', (e) => {
-//   const file = e.target.files[0]
-//   if (!file) return
-
-//   currentFile = file
-
-//   const newTitle = file.name
-
-//   buildMarquee(newTitle)
-
-//   const objectURL = URL.createObjectURL(file)
-
-//   audio.src = objectURL
-
-//   document.getElementById('kbpsDisplay').textContent = '--'
-//   document.getElementById('khzDisplay').textContent = '--'
-
-//   // progress.style.width = '0%'
-//   currentTimeEl.textContent = '0:00'
-
-//   playBtn.disabled = true
-//   pauseBtn.style.display = 'none'
-//   playBtn.style.display = 'inline-block'
-// })
-
 fileInput.addEventListener('change', (e) => {
   const files = Array.from(e.target.files)
   if (files.length === 0) return
@@ -256,7 +231,7 @@ playBtn.addEventListener('click', () => {
     return
   })
 
-  playBtn.style.display = 'none'
+  // playBtn.style.display = 'none'
   pauseBtn.style.display = 'inline-block'
   pauseBtn.disabled = false
   stopBtn.disabled = false
@@ -266,7 +241,7 @@ playBtn.addEventListener('click', () => {
 pauseBtn.addEventListener('click', () => {
   audio.pause()
 
-  pauseBtn.style.display = 'none'
+  // pauseBtn.style.display = 'none'
   playBtn.style.display = 'inline-block'
 
   playBtn.disabled = false
@@ -284,7 +259,7 @@ stopBtn.addEventListener('click', () => {
 })
 
 audio.addEventListener('pause', () => {
-  pauseBtn.style.display = 'none'
+  // pauseBtn.style.display = 'none'
   playBtn.style.display = 'inline-block'
 })
 
