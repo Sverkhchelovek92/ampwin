@@ -410,3 +410,16 @@ input[type='file'] {
   color: #00ff80;
   font-weight: bold;
 }
+
+.playlist-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.playlist-panel::-webkit-scrollbar-track {
+  background: #111;
+}
+
+.playlist-panel::-webkit-scrollbar-thumb {
+  background: #555;
+  border: 1px solid #888;
+}
