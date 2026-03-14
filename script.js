@@ -10,6 +10,7 @@ const stopBtn = document.getElementById('stopBtn')
 const prevBtn = document.getElementById('prevBtn')
 const nextBtn = document.getElementById('nextBtn')
 const loopBtn = document.getElementById('loopBtn')
+const shuffleBtn = document.getElementById('shuffleBtn')
 
 const progress = document.querySelector('.seek-knob')
 const progressContainer = document.querySelector('.progress-container')
@@ -21,6 +22,7 @@ const volumeSlider = document.getElementById('volume')
 const balanceSlider = document.getElementById('balance')
 
 let isLoopEnabled = false
+let isShuffleEnabled = false
 
 let currentFile = null
 
@@ -396,4 +398,14 @@ prevBtn.addEventListener('click', () => {
   }
 
   playTrack(prevIndex)
+})
+
+shuffleBtn.addEventListener('click', () => {
+  isShuffleEnabled = !isShuffleEnabled
+
+  if (isShuffleEnabled) {
+    shuffleBtn.classList.add('active')
+  } else {
+    shuffleBtn.classList.remove('active')
+  }
 })
