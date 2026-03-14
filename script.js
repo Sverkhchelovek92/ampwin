@@ -266,16 +266,24 @@ audio.addEventListener('pause', () => {
 })
 
 audio.addEventListener('ended', () => {
+  if (playlist.length === 0) return
+
   if (isLoopEnabled) {
     audio.currentTime = 0
     audio.play()
     return
   }
 
-  let nextIndex = currentTrackIndex + 1
+  let nextIndex
 
-  if (nextIndex >= playlist.length) {
-    nextIndex = 0
+  if (isShuffleEnabled) {
+    nextIndex = Math.floor(Math.random() * playlist.length)
+  } else {
+    nextIndex = currentTrackIndex + 1
+
+    if (nextIndex >= playlist.length) {
+      nextIndex = 0
+    }
   }
 
   playTrack(nextIndex)
@@ -379,10 +387,16 @@ balanceSlider.addEventListener('input', () => {
 nextBtn.addEventListener('click', () => {
   if (playlist.length === 0) return
 
-  let nextIndex = currentTrackIndex + 1
+  let nextIndex
 
-  if (nextIndex >= playlist.length) {
-    nextIndex = 0
+  if (isShuffleEnabled) {
+    nextIndex = Math.floor(Math.random() * playlist.length)
+  } else {
+    nextIndex = currentTrackIndex + 1
+
+    if (nextIndex >= playlist.length) {
+      nextIndex = 0
+    }
   }
 
   playTrack(nextIndex)
