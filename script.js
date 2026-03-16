@@ -21,6 +21,8 @@ const durationEl = document.getElementById('duration')
 const volumeSlider = document.getElementById('volume')
 const balanceSlider = document.getElementById('balance')
 
+const playlistPanel = document.querySelector('.playlist-panel')
+
 let isLoopEnabled = false
 let isShuffleEnabled = false
 
@@ -421,5 +423,44 @@ shuffleBtn.addEventListener('click', () => {
     shuffleBtn.classList.add('active')
   } else {
     shuffleBtn.classList.remove('active')
+  }
+})
+
+// Playlist Drag & Drop
+
+playlistPanel.addEventListener('dragover', (e) => {
+  e.preventDefault()
+  playlistPanel.classList.add('drag-over')
+})
+
+playlistPanel.addEventListener('dragleave', () => {
+  playlistPanel.classList.remove('drag-over')
+})
+
+playlistPanel.addEventListener('drop', (e) => {
+  e.preventDefault()
+  playlistPanel.classList.remove('drag-over')
+
+  const files = Array.from(e.dataTransfer.files).filter((file) =>
+    file.type.startsWith('audio/'),
+  )
+
+  if (files.length === 0) return
+
+  files.forEach((file) => {
+    const url = URL.createObjectURL(file)
+
+    playlist.push({
+      id: Date.now() + Math.random(),
+      name: file.name,
+      file: file,
+      url: url,
+    })
+  })
+
+  renderPlaylist()
+
+  if (currentTrackIndex === -1) {
+    playTrack(0)
   }
 })
