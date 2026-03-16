@@ -145,7 +145,10 @@ function renderPlaylist() {
       renderPlaylist()
     })
 
-    li.addEventListener('dblclick', () => playTrack(index))
+    li.addEventListener('dblclick', () => {
+      playTrack(index)
+      playBtn.disabled = true
+    })
 
     ul.appendChild(li)
   })
@@ -171,6 +174,13 @@ function playTrack(index) {
   progress.style.left = '0px'
 
   audio.play().catch((err) => console.error(err))
+
+  // playBtn.style.display = 'none'
+  pauseBtn.style.display = 'inline-block'
+
+  pauseBtn.disabled = false
+  stopBtn.disabled = false
+  playBtn.disabled = true
 
   renderPlaylist()
 }
@@ -312,6 +322,10 @@ audio.addEventListener('timeupdate', updateProgress)
 
 audio.addEventListener('play', () => {
   updateProgress()
+
+  playBtn.disabled = true
+  pauseBtn.disabled = false
+  stopBtn.disabled = false
 })
 
 // Progress click
@@ -472,4 +486,13 @@ playlistPanel.addEventListener('drop', (e) => {
   if (currentTrackIndex === -1) {
     playTrack(0)
   }
+})
+
+document.addEventListener('contextmenu', (e) => {
+  if (!e.target.closest('.playlist-panel')) return
+
+  e.preventDefault()
+
+  selectedTrackIndex = -1
+  renderPlaylist()
 })
