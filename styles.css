@@ -423,3 +423,7 @@ input[type='file'] {
   background: #555;
   border: 1px solid #888;
 }
+
+.playlist-panel.drag-over {
+  background: #012901;
+}
