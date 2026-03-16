@@ -411,6 +411,10 @@ input[type='file'] {
   font-weight: bold;
 }
 
+.playlist-list li.selected {
+  background: rgb(63, 80, 62);
+}
+
 .playlist-panel::-webkit-scrollbar {
   width: 8px;
 }

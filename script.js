@@ -32,6 +32,7 @@ let currentFile = null
 
 let playlist = []
 let currentTrackIndex = -1
+let selectedTrackIndex = -1
 
 // Audio element
 
@@ -137,8 +138,15 @@ function renderPlaylist() {
     li.dataset.index = index
 
     if (index === currentTrackIndex) li.classList.add('playing')
+    if (index === selectedTrackIndex) li.classList.add('selected')
 
-    li.addEventListener('click', () => playTrack(index))
+    li.addEventListener('click', () => {
+      selectedTrackIndex = index
+      renderPlaylist()
+    })
+
+    li.addEventListener('dblclick', () => playTrack(index))
+
     ul.appendChild(li)
   })
 }
@@ -147,6 +155,7 @@ function playTrack(index) {
   if (index < 0 || index >= playlist.length) return
 
   currentTrackIndex = index
+  selectedTrackIndex = -1
   const track = playlist[index]
 
   currentFile = track.file
