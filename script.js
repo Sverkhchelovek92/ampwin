@@ -565,4 +565,29 @@ document.addEventListener('keydown', (e) => {
     selectedTrackIndex = -1
     renderPlaylist()
   }
+
+  if (e.key === 'Delete') {
+    if (selectedTrackIndex === -1) return
+
+    const removedIndex = selectedTrackIndex
+
+    playlist.splice(removedIndex, 1)
+
+    if (removedIndex === currentTrackIndex) {
+      if (playlist.length === 0) {
+        audio.pause()
+        showEndedState()
+        currentTrackIndex = -1
+      } else {
+        const nextIndex = Math.min(removedIndex, playlist.length - 1)
+        playTrack(nextIndex)
+      }
+    } else if (removedIndex < currentTrackIndex) {
+      currentTrackIndex--
+    }
+
+    selectedTrackIndex = -1
+
+    renderPlaylist()
+  }
 })

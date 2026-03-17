@@ -435,7 +435,3 @@ input[type='file'] {
 .playlist-list li.dragging {
   opacity: 0.5;
 }
-
-.playlist-list li:hover {
-  background: #002200;
-}
