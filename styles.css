@@ -431,3 +431,11 @@ input[type='file'] {
 .playlist-panel.drag-over {
   background: #012901;
 }
+
+.playlist-list li.dragging {
+  opacity: 0.5;
+}
+
+.playlist-list li:hover {
+  background: #002200;
+}

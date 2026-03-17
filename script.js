@@ -28,6 +28,8 @@ let isShuffleEnabled = false
 
 let currentFile = null
 
+let draggedIndex = null
+
 // Playlist
 
 let playlist = []
@@ -137,6 +139,8 @@ function renderPlaylist() {
     li.textContent = `${index + 1}. ${track.name}`
     li.dataset.index = index
 
+    li.setAttribute('draggable', true)
+
     if (index === currentTrackIndex) li.classList.add('playing')
     if (index === selectedTrackIndex) li.classList.add('selected')
 
@@ -155,6 +159,47 @@ function renderPlaylist() {
     })
 
     ul.appendChild(li)
+
+    li.addEventListener('dragstart', () => {
+      draggedIndex = index
+      li.classList.add('dragging')
+    })
+
+    li.addEventListener('dragend', () => {
+      draggedIndex = null
+      li.classList.remove('dragging')
+    })
+
+    li.addEventListener('dragover', (e) => {
+      e.preventDefault()
+    })
+
+    li.addEventListener('drop', (e) => {
+      e.preventDefault()
+
+      if (draggedIndex === null || draggedIndex === index) return
+
+      const draggedItem = playlist[draggedIndex]
+
+      playlist.splice(draggedIndex, 1)
+      playlist.splice(index, 0, draggedItem)
+
+      if (currentTrackIndex === draggedIndex) {
+        currentTrackIndex = index
+      } else if (
+        draggedIndex < currentTrackIndex &&
+        index >= currentTrackIndex
+      ) {
+        currentTrackIndex--
+      } else if (
+        draggedIndex > currentTrackIndex &&
+        index <= currentTrackIndex
+      ) {
+        currentTrackIndex++
+      }
+
+      renderPlaylist()
+    })
   })
 }
 
