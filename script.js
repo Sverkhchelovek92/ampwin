@@ -140,12 +140,16 @@ function renderPlaylist() {
     if (index === currentTrackIndex) li.classList.add('playing')
     if (index === selectedTrackIndex) li.classList.add('selected')
 
-    li.addEventListener('click', () => {
+    li.addEventListener('click', (e) => {
+      e.stopPropagation()
+
       selectedTrackIndex = index
       renderPlaylist()
     })
 
-    li.addEventListener('dblclick', () => {
+    li.addEventListener('dblclick', (e) => {
+      e.stopPropagation()
+
       playTrack(index)
       playBtn.disabled = true
     })
@@ -488,6 +492,8 @@ playlistPanel.addEventListener('drop', (e) => {
   }
 })
 
+// Unselect Track
+
 document.addEventListener('contextmenu', (e) => {
   if (!e.target.closest('.playlist-panel')) return
 
@@ -495,4 +501,23 @@ document.addEventListener('contextmenu', (e) => {
 
   selectedTrackIndex = -1
   renderPlaylist()
+})
+
+document.addEventListener('click', (e) => {
+  const isPlaylistItem = e.target.closest('.playlist-list li')
+  const isControl = e.target.closest('.transport-btn')
+  const isInput = e.target.closest('input')
+  const isProgress = e.target.closest('.progress-container')
+
+  if (!isPlaylistItem && !isControl && !isInput && !isProgress) {
+    selectedTrackIndex = -1
+    renderPlaylist()
+  }
+})
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    selectedTrackIndex = -1
+    renderPlaylist()
+  }
 })
