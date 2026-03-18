@@ -168,32 +168,70 @@ function renderPlaylist() {
     li.addEventListener('dragend', () => {
       draggedIndex = null
       li.classList.remove('dragging')
+
+      document.querySelectorAll('.playlist-list li').forEach((el) => {
+        el.classList.remove('drag-over-top', 'drag-over-bottom')
+      })
     })
 
     li.addEventListener('dragover', (e) => {
       e.preventDefault()
+
+      const rect = li.getBoundingClientRect()
+      const offset = e.clientY - rect.top
+      const half = rect.height / 2
+
+      li.classList.remove('drag-over-top', 'drag-over-bottom')
+
+      if (offset < half) {
+        li.classList.add('drag-over-top')
+      } else {
+        li.classList.add('drag-over-bottom')
+      }
+    })
+
+    li.addEventListener('dragleave', () => {
+      li.classList.remove('drag-over-top', 'drag-over-bottom')
     })
 
     li.addEventListener('drop', (e) => {
       e.preventDefault()
 
-      if (draggedIndex === null || draggedIndex === index) return
+      li.classList.remove('drag-over-top', 'drag-over-bottom')
+
+      if (draggedIndex === null) return
+
+      const rect = li.getBoundingClientRect()
+      const offset = e.clientY - rect.top
+      const half = rect.height / 2
+
+      let insertIndex = index
+
+      if (offset > half) {
+        insertIndex = index + 1
+      }
+
+      if (insertIndex > draggedIndex) {
+        insertIndex--
+      }
+
+      if (insertIndex === draggedIndex) return
 
       const draggedItem = playlist[draggedIndex]
 
       playlist.splice(draggedIndex, 1)
-      playlist.splice(index, 0, draggedItem)
+      playlist.splice(insertIndex, 0, draggedItem)
 
       if (currentTrackIndex === draggedIndex) {
-        currentTrackIndex = index
+        currentTrackIndex = insertIndex
       } else if (
         draggedIndex < currentTrackIndex &&
-        index >= currentTrackIndex
+        insertIndex >= currentTrackIndex
       ) {
         currentTrackIndex--
       } else if (
         draggedIndex > currentTrackIndex &&
-        index <= currentTrackIndex
+        insertIndex <= currentTrackIndex
       ) {
         currentTrackIndex++
       }

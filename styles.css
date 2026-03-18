@@ -435,3 +435,26 @@ input[type='file'] {
 .playlist-list li.dragging {
   opacity: 0.5;
 }
+
+.playlist-list li {
+  position: relative;
+}
+
+.playlist-list li.drag-over-top::before,
+.playlist-list li.drag-over-bottom::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #ffd700;
+  pointer-events: none;
+}
+
+.playlist-list li.drag-over-top::before {
+  top: 0;
+}
+
+.playlist-list li.drag-over-bottom::after {
+  bottom: 0;
+}
