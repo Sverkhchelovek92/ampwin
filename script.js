@@ -322,7 +322,6 @@ function updateProgress() {
 // End (Stop) State
 
 function showEndedState() {
-  pauseBtn.style.display = 'none'
   playBtn.style.display = 'inline-block'
 
   stopBtn.disabled = true
@@ -341,7 +340,6 @@ playBtn.addEventListener('click', () => {
     return
   })
 
-  // playBtn.style.display = 'none'
   pauseBtn.style.display = 'inline-block'
   pauseBtn.disabled = false
   stopBtn.disabled = false
@@ -351,7 +349,6 @@ playBtn.addEventListener('click', () => {
 pauseBtn.addEventListener('click', () => {
   audio.pause()
 
-  // pauseBtn.style.display = 'none'
   playBtn.style.display = 'inline-block'
 
   playBtn.disabled = false
@@ -369,7 +366,6 @@ stopBtn.addEventListener('click', () => {
 })
 
 audio.addEventListener('pause', () => {
-  // pauseBtn.style.display = 'none'
   playBtn.style.display = 'inline-block'
 })
 
