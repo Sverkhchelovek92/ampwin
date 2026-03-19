@@ -452,6 +452,12 @@ function initAudioGraph() {
 
   sourceNode = audioCtx.createMediaElementSource(audio)
 
+  analyser = audioCtx.createAnalyser()
+  analyser.fftSize = 128
+
+  const bufferLength = analyser.frequencyBinCount
+  dataArray = new Uint8Array(bufferLength)
+
   splitter = audioCtx.createChannelSplitter(2)
 
   leftGain = audioCtx.createGain()
@@ -459,7 +465,8 @@ function initAudioGraph() {
 
   merger = audioCtx.createChannelMerger(2)
 
-  sourceNode.connect(splitter)
+  sourceNode.connect(analyser)
+  analyser.connect(splitter)
 
   splitter.connect(leftGain, 0)
   splitter.connect(rightGain, 1)
@@ -470,6 +477,7 @@ function initAudioGraph() {
   merger.connect(audioCtx.destination)
 
   updateBalance()
+  startVisualizer()
 }
 
 function updateBalance() {
