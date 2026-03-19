@@ -33,6 +33,15 @@ let draggedIndex = null
 let analyser = null
 let dataArray = null
 
+function resizeCanvas() {
+  const canvas = document.getElementById('visualizer')
+  canvas.width = canvas.clientWidth
+  canvas.height = canvas.clientHeight
+}
+
+window.addEventListener('resize', resizeCanvas)
+resizeCanvas()
+
 // Playlist
 
 let playlist = []
@@ -636,3 +645,33 @@ document.addEventListener('keydown', (e) => {
     renderPlaylist()
   }
 })
+
+// Visualizer
+
+function startVisualizer() {
+  const canvas = document.getElementById('visualizer')
+  const ctx = canvas.getContext('2d')
+
+  function draw() {
+    requestAnimationFrame(draw)
+
+    if (!analyser) return
+
+    analyser.getByteFrequencyData(dataArray)
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+    const barWidth = canvas.width / dataArray.length
+
+    for (let i = 0; i < dataArray.length; i++) {
+      const value = dataArray[i]
+      const height = (value / 255) * canvas.height
+
+      ctx.fillStyle = '#00ff00'
+
+      ctx.fillRect(i * barWidth, canvas.height - height, barWidth - 1, height)
+    }
+  }
+
+  draw()
+}
