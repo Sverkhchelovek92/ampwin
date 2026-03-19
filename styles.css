@@ -96,6 +96,7 @@ body {
   color: #00ff41;
   text-shadow: 0 0 4px #00ff4180;
   white-space: nowrap;
+  margin-right: 5px;
 }
 
 .marquee-wrapper {
@@ -299,6 +300,7 @@ input[type='file'] {
 .volume-balance {
   display: flex;
   margin-top: 0.5rem;
+  margin-right: 5px;
 }
 
 #balance {
@@ -457,4 +459,13 @@ input[type='file'] {
 
 .playlist-list li.drag-over-bottom::after {
   bottom: 0;
+}
+
+#visualizer {
+  width: 95%;
+  height: 60px;
+  background: black;
+  border: 1px inset #222;
+  display: block;
+  margin-left: 5px;
 }

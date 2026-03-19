@@ -30,6 +30,9 @@ let currentFile = null
 
 let draggedIndex = null
 
+let analyser = null
+let dataArray = null
+
 // Playlist
 
 let playlist = []
