@@ -207,6 +207,13 @@ input[type='file'] {
   transform: translateY(-50%);
 }
 
+.display-block {
+  background: #000;
+  border: 1px inset #222;
+  padding: 4px;
+  font-family: 'VT323', monospace;
+}
+
 .time {
   font-size: 0.9rem;
   color: #888888;
@@ -216,8 +223,14 @@ input[type='file'] {
 }
 
 .time-display {
-  background-color: black;
-  margin-left: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  color: #00ff41;
+  font-size: 16px;
+
+  margin-bottom: 2px;
 }
 
 #currentTime {
@@ -462,10 +475,14 @@ input[type='file'] {
 }
 
 #visualizer {
-  width: 95%;
+  width: 100%;
   height: 60px;
   background: black;
-  border: 1px inset #222;
+  /* border: 1px inset #222; */
   display: block;
-  margin-left: 5px;
+  margin-left: 0px;
+}
+
+#playState {
+  width: 20px;
 }

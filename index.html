@@ -21,10 +21,14 @@
 
       <div class="info-block" id="infoBlock">
         <div class="left-section">
-          <div class="time-display">
-            <span id="currentTime">00:00</span>
+          <div class="display-block">
+            <div class="time-display">
+              <span id="playState">▶</span>
+              <span id="currentTime">00:00</span>
+            </div>
+
+            <canvas id="visualizer"></canvas>
           </div>
-          <canvas id="visualizer"></canvas>
         </div>
         <div class="right-section">
           <div class="track-name" id="trackName">
