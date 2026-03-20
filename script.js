@@ -40,7 +40,7 @@ function resizeCanvas() {
 }
 
 window.addEventListener('resize', resizeCanvas)
-resizeCanvas()
+window.addEventListener('load', resizeCanvas)
 
 // Playlist
 
@@ -256,6 +256,8 @@ function renderPlaylist() {
 function playTrack(index) {
   if (index < 0 || index >= playlist.length) return
 
+  initAudioGraph()
+
   currentTrackIndex = index
   selectedTrackIndex = -1
   const track = playlist[index]
@@ -456,6 +458,10 @@ loopBtn.addEventListener('click', () => {
 
 function initAudioGraph() {
   if (audioCtx) return
+
+  // if (audioCtx.state === 'suspended') {
+  //   audioCtx.resume()
+  // }
 
   audioCtx = new (window.AudioContext || window.webkitAudioContext)()
 
