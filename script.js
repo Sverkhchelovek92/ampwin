@@ -671,7 +671,11 @@ function startVisualizer() {
 
     for (let i = 0; i < dataArray.length; i++) {
       const value = dataArray[i]
-      const height = (value / 255) * canvas.height
+
+      const boost = i / dataArray.length
+      const adjusted = value * (0.5 + boost)
+
+      const height = (adjusted / 255) * canvas.height
 
       ctx.fillStyle = '#00ff00'
 
