@@ -23,6 +23,8 @@ const balanceSlider = document.getElementById('balance')
 
 const playlistPanel = document.querySelector('.playlist-panel')
 
+const playStateEl = document.getElementById('playState')
+
 let isLoopEnabled = false
 let isShuffleEnabled = false
 
@@ -343,6 +345,8 @@ function showEndedState() {
 
   progress.style.left = '0px'
   currentTimeEl.textContent = '0:00'
+
+  playStateEl.textContent = '⏹'
 }
 
 // Play and Pause btns
@@ -353,6 +357,8 @@ playBtn.addEventListener('click', () => {
     console.error('Playback error:', err)
     return
   })
+
+  playStateEl.textContent = '▶'
 
   pauseBtn.style.display = 'inline-block'
   pauseBtn.disabled = false
@@ -381,6 +387,10 @@ stopBtn.addEventListener('click', () => {
 
 audio.addEventListener('pause', () => {
   playBtn.style.display = 'inline-block'
+
+  if (audio.currentTime > 0 && !audio.ended) {
+    playStateEl.textContent = '⏸'
+  }
 })
 
 audio.addEventListener('ended', () => {
@@ -419,6 +429,8 @@ audio.addEventListener('timeupdate', updateProgress)
 
 audio.addEventListener('play', () => {
   updateProgress()
+
+  playStateEl.textContent = '▶'
 
   playBtn.disabled = true
   pauseBtn.disabled = false
